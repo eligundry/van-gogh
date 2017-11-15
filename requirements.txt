@@ -1,6 +1,8 @@
 # I always develop as if I have good tests and a good CI that builds nightly, so
 # I leave all dependencies unpinned.
 Flask
+# Flask Classful is the best blueprint manager IMHO
+Flask-Classful
 # I'm using SQLAlchemy here instead of my beloved Peewee because it's relevant
 # to ARTA's stack.
 Flask-SQLAlchemy
@@ -11,3 +13,8 @@ Flask-Webpack
 Flask-Marshmallow
 # Gunicorn will serve this app through a reverse proxy.
 gunicorn
+
+# Various testing helpers. In an actual app, I would have a separate requirements file or use something like pipenv.
+pytest
+pytest-flask
+flask-shell-ipython

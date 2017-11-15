@@ -1,9 +1,11 @@
 FROM python:3-slim
 
-ADD ./requirements.txt /opt/app/requirements.txt
-RUN pip install -r requirements.txt
+ADD ./requirements.txt /opt/van_gogh/requirements.txt
+RUN pip install -r /opt/van_gogh/requirements.txt
 
-ADD . /opt/app
-WORKDIR /opt/app
+ADD . /opt/van_gogh
+WORKDIR /opt/van_gogh
+
+EXPOSE 8000
 
 USER nobody

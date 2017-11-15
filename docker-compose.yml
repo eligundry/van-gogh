@@ -1,18 +1,33 @@
 version: '2'
 services:
-  app:
+  van_gogh:
     build: .
-    entrypoint: '/opt/app/bin/entrypoint.sh'
+    container_name: van-gogh
+    ports:
+      - '8000:8000'
+    entrypoint: '/opt/van_gogh/bin/entrypoint.sh'
+    environment:
+      - VIRTUAL_HOST=van_gogh.dev
+      - VIRTUAL_PORT=8000
     volumes:
-      - ./:/opt/app
+      - ./:/opt/van_gogh
 
   postgres:
     image: postgres
+    container_name: van-gogh-db
     environment:
-      - POSTGRES_DB=app
+      - POSTGRES_DB=van_gogh
       - POSTGRES_PASSWORD=password
     volumes:
       - data_postgres:/var/lib/postgresql/data
+
+  nginx:
+    image: jwilder/nginx-proxy
+    container_name: van-gogh-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
 
 volumes:
   data_postgres: {}

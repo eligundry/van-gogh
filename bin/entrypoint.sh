@@ -1,7 +1,12 @@
 #!/bin/sh
 
 # Run gunicorn
-gunicorn -u nobody app.wsgi:app --reload --timeout=60 --log-level=info
+gunicorn van_gogh.wsgi:app \
+    -u nobody \
+    --reload \
+    --timeout=60 \
+    --log-level=info \
+    -b 0.0.0.0:8000
 
 # Always smart to take a sec between restarts
 sleep 1
