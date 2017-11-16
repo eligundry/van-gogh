@@ -6,15 +6,24 @@ Flask-Classful
 # I'm using SQLAlchemy here instead of my beloved Peewee because it's relevant
 # to ARTA's stack.
 Flask-SQLAlchemy
+# Since I am using SQLAlchemy, I will use alembic. That said, I really dislike
+# alembic and prefer to write my migrations by hand, but in the sake of saving
+# time, we're going this way.
+alembic
+Flask-Migrate
+# Since I am using Postgres, gotta install this
+psycopg2
 # I'm going to do some React because why not? I don't want to think about
 # Webpack, so I'm gonna try out this Flask extension.
 Flask-Webpack
 # Marshmallow is the best, so of course I'm going to use it.
 Flask-Marshmallow
+Marshmallow-SQLAlchemy
 # Gunicorn will serve this app through a reverse proxy.
 gunicorn
 
-# Various testing helpers. In an actual app, I would have a separate requirements file or use something like pipenv.
+# Various testing helpers. In an actual app, I would have a separate
+# requirements file or use something like pipenv.
 pytest
 pytest-flask
 flask-shell-ipython

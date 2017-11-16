@@ -6,6 +6,7 @@ RUN pip install -r /opt/van_gogh/requirements.txt
 ADD . /opt/van_gogh
 WORKDIR /opt/van_gogh
 
-EXPOSE 8000
+# Compile all the Python files so the build breaks if there is a syntax error.
+RUN python3 -m compileall .
 
 USER nobody
