@@ -23,6 +23,7 @@ def upgrade():
         sa.Column('name', sa.Unicode(255), nullable=False),
         sa.Column('created', sa.DateTime(), nullable=False),
         sa.PrimaryKeyConstraint('id'),
+        sa.UniqueConstraint('name', name='uq_artists_name'),
     )
     op.create_table(
         'votes',

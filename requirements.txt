@@ -27,3 +27,6 @@ gunicorn
 pytest
 pytest-flask
 flask-shell-ipython
+pdbpp
+faker
+fleaker

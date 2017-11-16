@@ -20,6 +20,7 @@ services:
       - POSTGRES_PASSWORD=password
     volumes:
       - data_postgres:/var/lib/postgresql/data
+      - ./docker/test-database.sql:/docker-entrypoint-initdb.d/test-database.sql
 
   nginx:
     image: jwilder/nginx-proxy
