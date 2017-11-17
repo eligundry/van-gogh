@@ -1,0 +1,20 @@
+<form class="vote">
+  <h2>Vote</h2>
+  {{#each artists}}
+  <div class="form-check">
+    <label for="artist-{{id}}">
+      <input type="radio" name="artist" id="artist-{{id}}" value="{{id}}">
+      {{name}}
+    </label>
+  </div>
+  {{/each}}
+  <div class="form-check">
+    <label for="artist-other">
+      <input id="artist-other" type="radio" name="artist" value="other">
+      <input type="text" placeholder="Other" name="name">
+    </label>
+  </div>
+  <button class="btn btn-primary" type="submit">
+    Submit Vote
+  </button>
+</form>

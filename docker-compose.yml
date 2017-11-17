@@ -1,4 +1,4 @@
-version: '2'
+version: '2.1'
 services:
   van_gogh:
     build: .
@@ -11,6 +11,9 @@ services:
       - VIRTUAL_PORT=8000
     volumes:
       - ./:/opt/van_gogh
+    depends_on:
+      postgres:
+        condition: service_healthy
 
   postgres:
     image: postgres
@@ -21,14 +24,19 @@ services:
     volumes:
       - data_postgres:/var/lib/postgresql/data
       - ./docker/test-database.sql:/docker-entrypoint-initdb.d/test-database.sql
+    healthcheck:
+      test: "pg_isready"
+      timeout: 1s
+      retries: 10
 
-  nginx:
-    image: jwilder/nginx-proxy
-    container_name: van-gogh-nginx
-    ports:
-      - "80:80"
-    volumes:
-      - /var/run/docker.sock:/tmp/docker.sock:ro
+  # @TODO Get this working
+  # nginx:
+  #   image: jwilder/nginx-proxy
+  #   container_name: van-gogh-nginx
+  #   ports:
+  #     - "80:80"
+  #   volumes:
+  #     - /var/run/docker.sock:/tmp/docker.sock:ro
 
 volumes:
   data_postgres: {}

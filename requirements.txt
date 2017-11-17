@@ -4,7 +4,7 @@ Flask
 # Flask Classful is the best blueprint manager IMHO
 Flask-Classful
 # I'm using SQLAlchemy here instead of my beloved Peewee because it's relevant
-# to ARTA's stack.
+# to the comapny's stack.
 Flask-SQLAlchemy
 # Since I am using SQLAlchemy, I will use alembic. That said, I really dislike
 # alembic and prefer to write my migrations by hand, but in the sake of saving

@@ -5,7 +5,7 @@ import string
 
 
 # Basic Flask things
-DEBUG = False
+DEBUG = True
 TESTING = False
 SECRET_KEY = ''.join(random.choices(string.ascii_letters + string.digits, k=64))
 

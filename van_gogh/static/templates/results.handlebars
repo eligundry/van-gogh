@@ -1,0 +1,9 @@
+<div class="results">
+  <h2>Results ({{total_votes}} (Vote(s)))</h2>
+  {{#each artists}}
+  <div class="result">
+    <h4>{{name}} ({{vote_count}} Vote(s))</h4>
+    <progress value="{{vote_count}}" max="{{../total_votes}}"></progress>
+  </div>
+  {{/each}}
+</div>

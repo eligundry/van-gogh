@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Migrate the database up
+./bin/flask db upgrade
+
 # Run gunicorn
 gunicorn van_gogh.wsgi:app \
     -u nobody \

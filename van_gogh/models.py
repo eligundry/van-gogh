@@ -41,12 +41,10 @@ class Artist(db.Model, Base):
 
     @classmethod
     def get_all(cls):
-        vote_count = cls.vote_count
-
         return (
             db.session
-            .query(cls, vote_count)
-            .order_by(vote_count.desc(), cls.name)
+            .query(cls)
+            .order_by(cls.vote_count.desc(), cls.name)
         )
 
     def add_vote(self):
@@ -64,6 +62,7 @@ class Artist(db.Model, Base):
     @classmethod
     def create_and_add_vote(cls, data):
         schema = ArtistCreateSchema()
+        schema.validate(data)
         serialized = schema.load(data).data
 
         try:
@@ -71,7 +70,12 @@ class Artist(db.Model, Base):
             db.session.add(artist)
             db.session.commit()
         except IntegrityError:
-            artist = db.session.query(cls).filter_by(name=serialized['name'])
+            db.session.rollback()
+            artist = (
+                db.session.query(cls)
+                .filter_by(name=serialized['name'])
+                .one()
+            )
 
         artist.add_vote()
 
