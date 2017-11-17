@@ -1,6 +1,8 @@
 """Module that defines all the routes in this application."""
 
-from flask import jsonify, render_template, request
+import os
+
+from flask import jsonify, render_template, request, send_from_directory
 from flask_classful import FlaskView, route
 from marshmallow import ValidationError
 
@@ -8,14 +10,24 @@ from van_gogh import models
 from van_gogh.schemata import ArtistSchema
 
 
+FRONTEND = os.path.join('opt', 'van_gogh', 'frontend', 'build')
+
+
 class StaticView(FlaskView):
     trailing_slash = False
     route_base = '/'
 
-    @route('/', defaults={'path': ''})
+    @route('', defaults={'path': 'index.html'})
     @route('/<path:path>')
     def index(self, path):
-        return render_template('index.html')
+        # This is the hackiest way to do this, but here we are.
+        # https://stackoverflow.com/a/45634550/471292
+        possible_target = os.path.join(FRONTEND, path)
+
+        if os.path.exists(possible_target):
+            return send_from_directory(FRONTEND, path)
+
+        return send_from_directory(FRONTEND, 'index.html')
 
 
 class ApiView(FlaskView):

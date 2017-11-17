@@ -25,7 +25,7 @@ def create_app(settings=ImmutableDict()):
     extensions.db.init_app(app)
     extensions.marshmallow.init_app(app)
     extensions.migrate.init_app(app, extensions.db)
-    # extensions.webpack.init_app(app)
+    extensions.webpack.init_app(app)
 
     # Register the routes
     blueprints.register(app)
